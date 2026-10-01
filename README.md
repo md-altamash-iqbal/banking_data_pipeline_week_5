@@ -267,6 +267,85 @@ Analytical SQL
 Business Analysis
 ```
 
+## 6 Concept Questions
+
+### 1. Why is incremental processing important?
+
+Incremental processing allows the pipeline to process only new or changed data instead of rebuilding the complete dataset every time.
+
+In this project, daily transaction files are processed using incremental loading. New transactions are inserted, while corrected transactions are updated using UPSERT logic.
+
+---
+
+### 2. What happens if the same daily file is processed twice?
+
+The pipeline is designed to be rerun-safe.
+
+When the same transaction is processed again, the existing `transaction_id` is detected and the record is updated instead of creating a duplicate transaction.
+
+Therefore, rerunning the same daily file does not increase the number of transaction records unnecessarily.
+
+---
+
+### 3. Why should the analytical database be built from the operational database instead of raw CSV files?
+
+The operational database contains trusted and validated data.
+
+Building the analytical layer from `banking.db` ensures that the analytical database uses the controlled operational dataset rather than bypassing validation and integrity checks applied to the raw data.
+
+In this project:
+
+```text
+Raw CSV
+   ↓
+Validation
+   ↓
+banking.db
+   ↓
+Analytical Transformation
+   ↓
+analytics.db
+```
+
+---
+
+### 4. Why is a star schema useful for analytical queries?
+
+A star schema separates transaction facts from descriptive dimensions.
+
+In this project:
+
+```text
+              dim_customer
+                   │
+                   │
+dim_branch ── fact_transaction ── dim_account
+                   │
+                   │
+                dim_date
+```
+
+The `fact_transaction` table stores transaction-level data, while the dimension tables provide information about customers, accounts, branches, and dates.
+
+This structure makes analytical queries easier to organize and understand.
+
+---
+
+### 5. What is the grain of the fact table?
+
+The grain of `fact_transaction` is:
+
+> **One row represents one banking transaction identified by `transaction_id`.**
+
+Each fact row connects the transaction to:
+
+- Customer
+- Account
+- Branch
+- Date
+
+This clearly defines what one row in the fact table represents and prevents ambiguity when performing analytical calculations.
+
 ## Goal
 
 The project demonstrates a complete small-scale data engineering workflow:
