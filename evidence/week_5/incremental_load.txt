@@ -1,0 +1,22 @@
+WEEK 5 - INCREMENTAL INSERT EVIDENCE
+====================================
+
+Daily file:
+transactions_20260907.csv
+
+Transactions introduced:
+T4001
+T4002
+T4003
+T4004
+
+First incremental processing result:
+Inserted: 4
+Updated: 0
+
+Final banking.db transaction count:
+20
+
+The four transaction IDs were inserted during the first
+processing of the 2026-09-07 daily file. Subsequent processing
+is protected by transaction_id primary key + UPSERT logic.

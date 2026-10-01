@@ -1,0 +1,483 @@
+================================================================================
+PART D - SQL ANALYSIS RESULTS
+================================================================================
+
+================================================================================
+QUERY 1
+================================================================================
+
+SQL:
+-- QUERY 1 - JOIN
+-- Transactions with customer, account, and branch details
+
+SELECT
+    t.transaction_id,
+    t.transaction_date,
+    t.transaction_type,
+    t.amount,
+    t.currency,
+    a.account_id,
+    c.customer_id,
+    c.customer_name,
+    b.branch_id,
+    b.branch_name,
+    b.city
+FROM transactions t
+JOIN accounts a
+    ON t.account_id = a.account_id
+JOIN customers c
+    ON a.customer_id = c.customer_id
+JOIN branches b
+    ON a.branch_id = b.branch_id
+ORDER BY t.transaction_id;
+
+RESULT:
+transaction_id | transaction_date | transaction_type | amount | currency | account_id | customer_id | customer_name | branch_id | branch_name | city
+--------------------------------------------------------------------------------
+T1001 | 2026-09-06 | CREDIT | 500.0 | USD | A1001 | C1001 | Maya Patel | BR001 | Downtown Branch | Chicago
+T1002 | 2026-09-06 | DEBIT | 125.5 | USD | A1002 | C1001 | Maya Patel | BR001 | Downtown Branch | Chicago
+T1007 | 2026-09-06 | DEBIT | 40.0 | USD | A1007 | C1002 | Daniel Kim | BR001 | Downtown Branch | Chicago
+T2001 | 2026-09-06 | CREDIT | 900.0 | USD | A2001 | C1003 | Sofia Martinez | BR002 | North Branch | Evanston
+T2005 | 2026-09-06 | CREDIT | 225.0 | USD | A2005 | C1003 | Sofia Martinez | BR002 | North Branch | Evanston
+T2007 | 2026-09-06 | DEBIT | 60.0 | USD | A2007 | C1004 | Noah Williams | BR002 | North Branch | Evanston
+T3001 | 2026-09-06 | CREDIT | 1000.0 | USD | A3001 | C1005 | Ava Thompson | BR003 | Lake Branch | Waukegan
+T3002 | 2026-09-06 | DEBIT | 200.0 | USD | A3002 | C1005 | Ava Thompson | BR003 | Lake Branch | Waukegan
+T3004 | 2026-09-06 | CREDIT | 350.0 | USD | A3004 | C1006 | Ethan Brown | BR003 | Lake Branch | Waukegan
+T3007 | 2026-09-06 | DEBIT | 25.0 | USD | A3007 | C1006 | Ethan Brown | BR003 | Lake Branch | Waukegan
+
+================================================================================
+QUERY 2
+================================================================================
+
+SQL:
+-- QUERY 2 - JOIN
+-- Accounts by customer
+
+
+SELECT
+    c.customer_id,
+    c.customer_name,
+    a.account_id,
+    a.account_type,
+    a.account_status
+FROM customers c
+JOIN accounts a
+    ON c.customer_id = a.customer_id
+ORDER BY c.customer_id, a.account_id;
+
+RESULT:
+customer_id | customer_name | account_id | account_type | account_status
+--------------------------------------------------------------------------------
+C1001 | Maya Patel | A1001 | CHECKING | ACTIVE
+C1001 | Maya Patel | A1002 | SAVINGS | ACTIVE
+C1002 | Daniel Kim | A1007 | CHECKING | ACTIVE
+C1003 | Sofia Martinez | A2001 | CHECKING | ACTIVE
+C1003 | Sofia Martinez | A2005 | SAVINGS | ACTIVE
+C1004 | Noah Williams | A2007 | CHECKING | ACTIVE
+C1005 | Ava Thompson | A3001 | CHECKING | ACTIVE
+C1005 | Ava Thompson | A3002 | SAVINGS | ACTIVE
+C1006 | Ethan Brown | A3004 | CHECKING | ACTIVE
+C1006 | Ethan Brown | A3007 | SAVINGS | ACTIVE
+
+================================================================================
+QUERY 3
+================================================================================
+
+SQL:
+-- QUERY 3 - JOIN
+-- Transactions by branch
+
+
+SELECT
+    b.branch_id,
+    b.branch_name,
+    t.transaction_id,
+    t.transaction_type,
+    t.amount
+FROM branches b
+JOIN accounts a
+    ON b.branch_id = a.branch_id
+JOIN transactions t
+    ON a.account_id = t.account_id
+ORDER BY b.branch_id, t.transaction_id;
+
+RESULT:
+branch_id | branch_name | transaction_id | transaction_type | amount
+--------------------------------------------------------------------------------
+BR001 | Downtown Branch | T1001 | CREDIT | 500.0
+BR001 | Downtown Branch | T1002 | DEBIT | 125.5
+BR001 | Downtown Branch | T1007 | DEBIT | 40.0
+BR002 | North Branch | T2001 | CREDIT | 900.0
+BR002 | North Branch | T2005 | CREDIT | 225.0
+BR002 | North Branch | T2007 | DEBIT | 60.0
+BR003 | Lake Branch | T3001 | CREDIT | 1000.0
+BR003 | Lake Branch | T3002 | DEBIT | 200.0
+BR003 | Lake Branch | T3004 | CREDIT | 350.0
+BR003 | Lake Branch | T3007 | DEBIT | 25.0
+
+================================================================================
+QUERY 4
+================================================================================
+
+SQL:
+-- QUERY 4 - AGGREGATION
+-- Number of transactions by customer
+
+
+SELECT
+    c.customer_id,
+    c.customer_name,
+    COUNT(t.transaction_id) AS transaction_count
+FROM customers c
+JOIN accounts a
+    ON c.customer_id = a.customer_id
+LEFT JOIN transactions t
+    ON a.account_id = t.account_id
+GROUP BY c.customer_id, c.customer_name
+ORDER BY transaction_count DESC, c.customer_id;
+
+RESULT:
+customer_id | customer_name | transaction_count
+--------------------------------------------------------------------------------
+C1001 | Maya Patel | 2
+C1003 | Sofia Martinez | 2
+C1005 | Ava Thompson | 2
+C1006 | Ethan Brown | 2
+C1002 | Daniel Kim | 1
+C1004 | Noah Williams | 1
+
+================================================================================
+QUERY 5
+================================================================================
+
+SQL:
+-- QUERY 5 - AGGREGATION
+-- Total transaction amount by customer
+
+
+SELECT
+    c.customer_id,
+    c.customer_name,
+    ROUND(SUM(t.amount), 2) AS total_transaction_amount
+FROM customers c
+JOIN accounts a
+    ON c.customer_id = a.customer_id
+JOIN transactions t
+    ON a.account_id = t.account_id
+GROUP BY c.customer_id, c.customer_name
+ORDER BY total_transaction_amount DESC;
+
+RESULT:
+customer_id | customer_name | total_transaction_amount
+--------------------------------------------------------------------------------
+C1005 | Ava Thompson | 1200.0
+C1003 | Sofia Martinez | 1125.0
+C1001 | Maya Patel | 625.5
+C1006 | Ethan Brown | 375.0
+C1004 | Noah Williams | 60.0
+C1002 | Daniel Kim | 40.0
+
+================================================================================
+QUERY 6
+================================================================================
+
+SQL:
+-- QUERY 6 - AGGREGATION
+-- Transaction count by branch
+
+
+SELECT
+    b.branch_id,
+    b.branch_name,
+    COUNT(t.transaction_id) AS transaction_count
+FROM branches b
+JOIN accounts a
+    ON b.branch_id = a.branch_id
+LEFT JOIN transactions t
+    ON a.account_id = t.account_id
+GROUP BY b.branch_id, b.branch_name
+ORDER BY transaction_count DESC, b.branch_id;
+
+RESULT:
+branch_id | branch_name | transaction_count
+--------------------------------------------------------------------------------
+BR003 | Lake Branch | 4
+BR001 | Downtown Branch | 3
+BR002 | North Branch | 3
+
+================================================================================
+QUERY 7
+================================================================================
+
+SQL:
+-- QUERY 7 - AGGREGATION
+-- Total amount by transaction type
+
+
+SELECT
+    transaction_type,
+    COUNT(*) AS transaction_count,
+    ROUND(SUM(amount), 2) AS total_amount,
+    ROUND(AVG(amount), 2) AS average_amount
+FROM transactions
+GROUP BY transaction_type
+ORDER BY total_amount DESC;
+
+RESULT:
+transaction_type | transaction_count | total_amount | average_amount
+--------------------------------------------------------------------------------
+CREDIT | 5 | 2975.0 | 595.0
+DEBIT | 5 | 450.5 | 90.1
+
+================================================================================
+QUERY 8
+================================================================================
+
+SQL:
+-- QUERY 8 - CASE
+-- Classify transactions into meaningful amount bands
+
+
+SELECT
+    transaction_id,
+    transaction_type,
+    amount,
+    CASE
+        WHEN amount < 100 THEN 'Small (<100)'
+        WHEN amount < 500 THEN 'Medium (100-499.99)'
+        ELSE 'Large (500+)'
+    END AS amount_band
+FROM transactions
+ORDER BY amount DESC;
+
+RESULT:
+transaction_id | transaction_type | amount | amount_band
+--------------------------------------------------------------------------------
+T3001 | CREDIT | 1000.0 | Large (500+)
+T2001 | CREDIT | 900.0 | Large (500+)
+T1001 | CREDIT | 500.0 | Large (500+)
+T3004 | CREDIT | 350.0 | Medium (100-499.99)
+T2005 | CREDIT | 225.0 | Medium (100-499.99)
+T3002 | DEBIT | 200.0 | Medium (100-499.99)
+T1002 | DEBIT | 125.5 | Medium (100-499.99)
+T2007 | DEBIT | 60.0 | Small (<100)
+T1007 | DEBIT | 40.0 | Small (<100)
+T3007 | DEBIT | 25.0 | Small (<100)
+
+================================================================================
+QUERY 9
+================================================================================
+
+SQL:
+-- QUERY 9 - CTE
+-- Calculate customer totals and filter the derived result
+
+
+WITH customer_totals AS (
+    SELECT
+        c.customer_id,
+        c.customer_name,
+        SUM(t.amount) AS total_amount
+    FROM customers c
+    JOIN accounts a
+        ON c.customer_id = a.customer_id
+    JOIN transactions t
+        ON a.account_id = t.account_id
+    GROUP BY c.customer_id, c.customer_name
+)
+SELECT
+    customer_id,
+    customer_name,
+    ROUND(total_amount, 2) AS total_amount
+FROM customer_totals
+WHERE total_amount >= 500
+ORDER BY total_amount DESC;
+
+RESULT:
+customer_id | customer_name | total_amount
+--------------------------------------------------------------------------------
+C1005 | Ava Thompson | 1200.0
+C1003 | Sofia Martinez | 1125.0
+C1001 | Maya Patel | 625.5
+
+================================================================================
+QUERY 10
+================================================================================
+
+SQL:
+-- QUERY 10 - WINDOW FUNCTION
+-- Rank transactions within each account
+
+
+SELECT
+    c.customer_id,
+    c.customer_name,
+    t.transaction_id,
+    t.transaction_type,
+    t.amount,
+    RANK() OVER (
+        PARTITION BY c.customer_id
+        ORDER BY t.amount DESC
+    ) AS transaction_rank
+FROM customers c
+JOIN accounts a
+    ON c.customer_id = a.customer_id
+JOIN transactions t
+    ON a.account_id = t.account_id
+ORDER BY c.customer_id, transaction_rank;
+
+RESULT:
+customer_id | customer_name | transaction_id | transaction_type | amount | transaction_rank
+--------------------------------------------------------------------------------
+C1001 | Maya Patel | T1001 | CREDIT | 500.0 | 1
+C1001 | Maya Patel | T1002 | DEBIT | 125.5 | 2
+C1002 | Daniel Kim | T1007 | DEBIT | 40.0 | 1
+C1003 | Sofia Martinez | T2001 | CREDIT | 900.0 | 1
+C1003 | Sofia Martinez | T2005 | CREDIT | 225.0 | 2
+C1004 | Noah Williams | T2007 | DEBIT | 60.0 | 1
+C1005 | Ava Thompson | T3001 | CREDIT | 1000.0 | 1
+C1005 | Ava Thompson | T3002 | DEBIT | 200.0 | 2
+C1006 | Ethan Brown | T3004 | CREDIT | 350.0 | 1
+C1006 | Ethan Brown | T3007 | DEBIT | 25.0 | 2
+
+================================================================================
+QUERY 11
+================================================================================
+
+SQL:
+-- QUERY 11 - WINDOW FUNCTION
+-- Running total for each account
+
+
+SELECT
+    c.customer_id,
+    c.customer_name,
+    t.transaction_id,
+    t.transaction_date,
+    t.amount,
+    ROUND(
+        SUM(t.amount) OVER (
+            PARTITION BY c.customer_id
+            ORDER BY t.transaction_date, t.transaction_id
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ),
+        2
+    ) AS running_total
+FROM customers c
+JOIN accounts a
+    ON c.customer_id = a.customer_id
+JOIN transactions t
+    ON a.account_id = t.account_id
+ORDER BY c.customer_id, t.transaction_date, t.transaction_id;
+
+RESULT:
+customer_id | customer_name | transaction_id | transaction_date | amount | running_total
+--------------------------------------------------------------------------------
+C1001 | Maya Patel | T1001 | 2026-09-06 | 500.0 | 500.0
+C1001 | Maya Patel | T1002 | 2026-09-06 | 125.5 | 625.5
+C1002 | Daniel Kim | T1007 | 2026-09-06 | 40.0 | 40.0
+C1003 | Sofia Martinez | T2001 | 2026-09-06 | 900.0 | 900.0
+C1003 | Sofia Martinez | T2005 | 2026-09-06 | 225.0 | 1125.0
+C1004 | Noah Williams | T2007 | 2026-09-06 | 60.0 | 60.0
+C1005 | Ava Thompson | T3001 | 2026-09-06 | 1000.0 | 1000.0
+C1005 | Ava Thompson | T3002 | 2026-09-06 | 200.0 | 1200.0
+C1006 | Ethan Brown | T3004 | 2026-09-06 | 350.0 | 350.0
+C1006 | Ethan Brown | T3007 | 2026-09-06 | 25.0 | 375.0
+
+================================================================================
+QUERY 12
+================================================================================
+
+SQL:
+-- QUERY 12 - WINDOW FUNCTION
+-- Rank customers by total transaction value
+
+
+WITH customer_totals AS (
+    SELECT
+        c.customer_id,
+        c.customer_name,
+        SUM(t.amount) AS total_amount
+    FROM customers c
+    JOIN accounts a
+        ON c.customer_id = a.customer_id
+    JOIN transactions t
+        ON a.account_id = t.account_id
+    GROUP BY c.customer_id, c.customer_name
+)
+SELECT
+    customer_id,
+    customer_name,
+    ROUND(total_amount, 2) AS total_amount,
+    RANK() OVER (
+        ORDER BY total_amount DESC
+    ) AS customer_rank
+FROM customer_totals
+ORDER BY customer_rank;
+
+RESULT:
+customer_id | customer_name | total_amount | customer_rank
+--------------------------------------------------------------------------------
+C1005 | Ava Thompson | 1200.0 | 1
+C1003 | Sofia Martinez | 1125.0 | 2
+C1001 | Maya Patel | 625.5 | 3
+C1006 | Ethan Brown | 375.0 | 4
+C1004 | Noah Williams | 60.0 | 5
+C1002 | Daniel Kim | 40.0 | 6
+
+================================================================================
+QUERY 13
+================================================================================
+
+SQL:
+-- QUERY 13 - BUSINESS QUESTION
+-- Which branch has the highest transaction value?
+
+
+SELECT
+    b.branch_id,
+    b.branch_name,
+    COUNT(t.transaction_id) AS transaction_count,
+    ROUND(SUM(t.amount), 2) AS total_transaction_value
+FROM branches b
+JOIN accounts a
+    ON b.branch_id = a.branch_id
+JOIN transactions t
+    ON a.account_id = t.account_id
+GROUP BY b.branch_id, b.branch_name
+ORDER BY total_transaction_value DESC;
+
+RESULT:
+branch_id | branch_name | transaction_count | total_transaction_value
+--------------------------------------------------------------------------------
+BR003 | Lake Branch | 4 | 1575.0
+BR002 | North Branch | 3 | 1185.0
+BR001 | Downtown Branch | 3 | 665.5
+
+================================================================================
+QUERY 14
+================================================================================
+
+SQL:
+-- QUERY 14 - BUSINESS QUESTION
+-- Which transaction type contributes the most value?
+
+
+SELECT
+    transaction_type,
+    COUNT(*) AS transaction_count,
+    ROUND(SUM(amount), 2) AS total_value,
+    ROUND(
+        SUM(amount) * 100.0 /
+        (SELECT SUM(amount) FROM transactions),
+        2
+    ) AS percentage_of_total
+FROM transactions
+GROUP BY transaction_type
+ORDER BY total_value DESC;
+
+RESULT:
+transaction_type | transaction_count | total_value | percentage_of_total
+--------------------------------------------------------------------------------
+CREDIT | 5 | 2975.0 | 86.85
+DEBIT | 5 | 450.5 | 13.15

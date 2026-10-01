@@ -1,0 +1,82 @@
+2026-09-16 17:33:24,506 - INFO - Pipeline started
+2026-09-16 17:33:24,507 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:33:24,512 - WARNING - File BR001_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:33:24,512 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:33:24,515 - WARNING - File BR002_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:33:24,515 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:33:24,518 - WARNING - File BR003_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:33:24,518 - WARNING - No valid input files to process.
+2026-09-16 17:34:00,507 - INFO - Pipeline started
+2026-09-16 17:34:00,508 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:34:00,512 - WARNING - File BR001_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:34:00,512 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:34:00,514 - WARNING - File BR002_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:34:00,514 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:34:00,516 - WARNING - File BR003_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:34:00,517 - WARNING - No valid input files to process.
+2026-09-16 17:43:55,993 - INFO - Pipeline started
+2026-09-16 17:43:55,994 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:43:55,999 - WARNING - File BR001_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:43:55,999 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:43:56,002 - WARNING - File BR002_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:43:56,002 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:43:56,005 - WARNING - File BR003_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:43:56,005 - WARNING - No valid input files to process.
+2026-09-16 17:43:56,031 - INFO - Pipeline completed successfully. Total=0, Valid=0, Invalid=0
+2026-09-16 17:46:44,301 - INFO - Pipeline started
+2026-09-16 17:46:44,304 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:46:44,311 - WARNING - File BR001_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:46:44,311 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:46:44,314 - WARNING - File BR002_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:46:44,314 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:46:44,318 - WARNING - File BR003_20260906_TRANSACTION.csv is missing required columns: ['cuurency']. Skipping this file.
+2026-09-16 17:46:44,318 - WARNING - No valid input files to process.
+2026-09-16 17:46:44,361 - INFO - Pipeline completed successfully. Total=0, Valid=0, Invalid=0
+2026-09-16 17:53:23,840 - INFO - Pipeline started
+2026-09-16 17:53:23,842 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:53:23,846 - WARNING - File BR001_20260906_TRANSACTION.csv is missing required columns: ['c/0urency']. Skipping this file.
+2026-09-16 17:53:23,846 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:53:23,848 - WARNING - File BR002_20260906_TRANSACTION.csv is missing required columns: ['c/0urency']. Skipping this file.
+2026-09-16 17:53:23,849 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:53:23,850 - WARNING - File BR003_20260906_TRANSACTION.csv is missing required columns: ['c/0urency']. Skipping this file.
+2026-09-16 17:53:23,851 - WARNING - No valid input files to process.
+2026-09-16 17:53:23,876 - INFO - Pipeline completed successfully. Total=0, Valid=0, Invalid=0
+2026-09-16 17:56:05,470 - INFO - Pipeline started
+2026-09-16 17:56:05,471 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,477 - INFO - Successfully read file: BR001_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,477 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,480 - INFO - Successfully read file: BR002_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,480 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,482 - INFO - Successfully read file: BR003_20260906_TRANSACTION.csv
+2026-09-16 17:56:05,538 - INFO - Pipeline completed successfully. Total=24, Valid=11, Invalid=13
+2026-09-16 23:54:26,822 - INFO - Pipeline started
+2026-09-16 23:54:26,823 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,826 - INFO - Successfully read file: BR001_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,826 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,828 - INFO - Successfully read file: BR002_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,828 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,829 - INFO - Successfully read file: BR003_20260906_TRANSACTION.csv
+2026-09-16 23:54:26,856 - INFO - Pipeline completed successfully. Total=24, Valid=10, Invalid=14
+2026-09-17 20:51:30,129 - INFO - Pipeline started
+2026-09-17 20:51:30,131 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-17 20:51:30,136 - INFO - Successfully read file: BR001_20260906_TRANSACTION.csv
+2026-09-17 20:51:30,136 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-17 20:51:30,139 - INFO - Successfully read file: BR002_20260906_TRANSACTION.csv
+2026-09-17 20:51:30,139 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-17 20:51:30,141 - INFO - Successfully read file: BR003_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,268 - INFO - Pipeline started
+2026-09-17 20:58:03,269 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,272 - INFO - Successfully read file: BR001_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,272 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,273 - INFO - Successfully read file: BR002_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,274 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,275 - INFO - Successfully read file: BR003_20260906_TRANSACTION.csv
+2026-09-17 20:58:03,303 - INFO - Pipeline completed successfully. Total=24, Valid=10, Invalid=14
+2026-09-20 18:29:28,498 - INFO - Pipeline started
+2026-09-20 18:29:28,499 - INFO - Reading file: BR001_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,502 - INFO - Successfully read file: BR001_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,502 - INFO - Reading file: BR002_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,504 - INFO - Successfully read file: BR002_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,504 - INFO - Reading file: BR003_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,506 - INFO - Successfully read file: BR003_20260906_TRANSACTION.csv
+2026-09-20 18:29:28,532 - INFO - Pipeline completed successfully. Total=24, Valid=10, Invalid=14

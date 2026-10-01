@@ -1,0 +1,4 @@
+metric,count
+total_input_records,24
+valid_records,10
+invalid_records,14

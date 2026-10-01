@@ -1,0 +1,15 @@
+metric,count
+files_discovered,3.0
+files_read,3.0
+files_skipped,0.0
+total_input_records,24.0
+valid_records,10.0
+invalid_records,14.0
+rejection_rate_percent,58.33
+duplicate_transaction_count,2.0
+missing_transaction_id,1.0
+missing_account_id,2.0
+invalid_transaction_date,2.0
+invalid_transaction_type,3.0
+invalid_amount,3.0
+invalid_currency,2.0

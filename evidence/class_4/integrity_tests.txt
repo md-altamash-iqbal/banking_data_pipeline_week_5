@@ -1,0 +1,42 @@
+======================================================================
+PART C - DATABASE INTEGRITY TEST RESULTS
+======================================================================
+
+======================================================================
+TEST: Transaction references nonexistent account
+EXPECTED CONSTRAINT: FOREIGN KEY (transactions.account_id)
+----------------------------------------------------------------------
+SQLITE ERROR: FOREIGN KEY constraint failed
+RESULT: PASS
+
+======================================================================
+TEST: Account references nonexistent customer
+EXPECTED CONSTRAINT: FOREIGN KEY (accounts.customer_id)
+----------------------------------------------------------------------
+SQLITE ERROR: FOREIGN KEY constraint failed
+RESULT: PASS
+
+======================================================================
+TEST: Duplicate account primary key
+EXPECTED CONSTRAINT: PRIMARY KEY (accounts.account_id)
+----------------------------------------------------------------------
+SQLITE ERROR: UNIQUE constraint failed: accounts.account_id
+RESULT: PASS
+
+======================================================================
+TEST: Transaction amount = -50
+EXPECTED CONSTRAINT: CHECK (amount > 0)
+----------------------------------------------------------------------
+SQLITE ERROR: CHECK constraint failed: amount > 0
+RESULT: PASS
+
+======================================================================
+TEST: Transaction missing required transaction_date
+EXPECTED CONSTRAINT: NOT NULL (transactions.transaction_date)
+----------------------------------------------------------------------
+SQLITE ERROR: NOT NULL constraint failed: transactions.transaction_date
+RESULT: PASS
+
+======================================================================
+INTEGRITY TESTING COMPLETE
+======================================================================

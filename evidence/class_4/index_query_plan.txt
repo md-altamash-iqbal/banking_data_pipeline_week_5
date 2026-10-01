@@ -1,0 +1,45 @@
+============================================================
+PART E - INDEX AND QUERY PLAN INVESTIGATION
+============================================================
+
+SELECTED QUERY
+------------------------------------------------------------
+SELECT
+            transaction_id,
+            transaction_date,
+            transaction_type,
+            amount,
+            currency
+        FROM transactions
+        WHERE account_id = 'A1001'
+        ORDER BY transaction_date;
+
+BEFORE INDEX
+------------------------------------------------------------
+(3, 0, 216, 'SCAN transactions')
+(16, 0, 0, 'USE TEMP B-TREE FOR ORDER BY')
+
+CREATING INDEX
+------------------------------------------------------------
+PASS: Index created successfully
+
+AFTER INDEX
+------------------------------------------------------------
+(4, 0, 61, 'SEARCH transactions USING INDEX idx_transactions_account_id (account_id=?)')
+(18, 0, 0, 'USE TEMP B-TREE FOR ORDER BY')
+
+COMPARISON
+------------------------------------------------------------
+Before index:
+[(3, 0, 216, 'SCAN transactions'), (16, 0, 0, 'USE TEMP B-TREE FOR ORDER BY')]
+
+After index:
+[(4, 0, 61, 'SEARCH transactions USING INDEX idx_transactions_account_id (account_id=?)'), (18, 0, 0, 'USE TEMP B-TREE FOR ORDER BY')]
+
+The query plan changed from a table scan to an index-based search using idx_transactions_account_id.
+The USE TEMP B-TREE FOR ORDER BY operation remained because the index is on account_id and not transaction_date.
+
+NOTE
+------------------------------------------------------------
+The database contains a very small number of transaction records. Therefore, this query-plan change does not prove a measurable performance improvement.
+The purpose of this investigation is to demonstrate how an index can change SQLite's query execution strategy.

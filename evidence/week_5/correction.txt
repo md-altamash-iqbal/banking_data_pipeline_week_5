@@ -1,0 +1,21 @@
+WEEK 5 - CORRECTION EVIDENCE
+============================
+
+Transaction ID: T4002
+
+Original daily record (2026-09-07):
+Amount = 50.00 USD
+
+Corrected daily record (2026-09-09):
+Amount = 55.00 USD
+
+Current banking.db value:
+('T4002', 55.0)
+
+Rerun result for 2026-09-09:
+Inserted: 0
+Updated: 4
+
+Conclusion:
+The existing transaction T4002 was corrected from 50.00 USD
+to 55.00 USD using the incremental UPSERT logic.
