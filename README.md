@@ -2,9 +2,7 @@
 
 A Python-based banking data pipeline that processes transaction data, performs data-quality validation, loads data into a relational SQLite database, handles incremental daily updates, and builds an analytical layer using a star schema.
 
-## Architecture
-
-## Architecture
+## Overall Architecture
 
 ```mermaid
 flowchart TD
